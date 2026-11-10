@@ -39,6 +39,27 @@ You can pin a specific port with `-p`/`--rid` or `MACVDMTOOL_RID=<rid>`.
 
 **VDM replies are polled with a time budget.** The old code did 16 immediate register reads, which races controllers that post their reply a few hundred microseconds later. The reply wait is now bounded by `-t <seconds>` (default 3). If every command times out on a setup that used to work, unplug and replug the cable: the controller can keep the reply from an earlier USB-PD session in its receive register.
 
+## Quick install (no build, no Xcode)
+
+A prebuilt arm64 macOS binary is published on every release:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/nguyendinhbaotu/macvdmtool/m4-support/install.sh | sudo sh
+sudo macvdmtool status
+```
+
+The script checks that you are on an Apple Silicon Mac, verifies the SHA-256 of
+the download against `SHA256SUMS`, clears the quarantine flag, ad-hoc signs the
+binary and installs it to `/usr/local/bin` (`PREFIX=/some/other/dir sudo sh` to
+change it). If no release binary is available it falls back to `make`.
+
+Or grab the binary directly:
+
+```sh
+curl -L https://github.com/nguyendinhbaotu/macvdmtool/releases/latest/download/macvdmtool -o macvdmtool
+chmod +x macvdmtool
+```
+
 ## Building
 
 Install the XCode commandline tools and type `make`. `make clean` removes the objects; `make install` honours `PREFIX` and `DESTDIR`.
