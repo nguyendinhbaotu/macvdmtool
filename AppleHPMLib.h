@@ -32,7 +32,7 @@ typedef struct {
     uint16_t field_22;
     IOReturn (*Read)(void *, uint64_t chipAddr, uint8_t dataAddr, void *buffer, uint64_t maxLen,
                      uint32_t flags, uint64_t *readLen);
-    IOReturn (*Write)(void *, uint64_t chipAddr, uint8_t dataAd6dr, const void *buffer,
+    IOReturn (*Write)(void *, uint64_t chipAddr, uint8_t dataAddr, const void *buffer,
                       uint64_t len, uint32_t flags);
     IOReturn (*Command)(void *, uint64_t chipAddr, uint32_t cmd, uint32_t flags);
     IOReturn (*field_40)(void);
